@@ -1,49 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/styles/style.css" rel="stylesheet">
-    <link href="/styles/fonts.css" rel="stylesheet">
-    <link href="/styles/media.css" rel="stylesheet">
-    <title>Landing Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Moraly - Conectando Você ao Seu Novo Lar</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f9f4;
+            color: #2c3e50;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+            background-color: #2e7d32;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(46,125,50,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            cursor: default;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 30px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: #a5d6a7;
+            outline: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #81c784 0%, #a5d6a7 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary {
+            background-color: #1b5e20;
+            color: #e8f5e9;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(27,94,32,0.5);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #388e3c;
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        /* Sections comuns */
+        section {
+            margin-top: 70px;
+            background: white;
+            border-radius: 15px;
+            padding: 50px 40px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-bottom: 3px solid #a5d6a7;
+            padding-bottom: 10px;
+            max-width: fit-content;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        ul {
+            list-style: inside disc;
+            color: #444;
+            font-size: 1.1rem;
+            padding-left: 10px;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+        }
+
+        .steps {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .step {
+            background: #e8f5e9;
+            flex: 1 1 30%;
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 3px 10px rgba(46,125,50,0.2);
+            transition: box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .step:hover {
+            box-shadow: 0 6px 20px rgba(46,125,50,0.4);
+        }
+
+        .step strong {
+            font-size: 1.5rem;
+            color: #2e7d32;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Contato com link Instagram estilizado */
+        .contact-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #2e7d32;
+            text-decoration: none;
+            border: 2px solid #2e7d32;
+            padding: 10px 25px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-link:hover,
+        .contact-link:focus {
+            background-color: #2e7d32;
+            color: white;
+            outline: none;
+        }
+
+        /* Footer estilizado */
+        footer {
+            background-color: #1b1b1b;
+            color: #bbb;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 100px;
+            font-size: 0.9rem;
+        }
+
+        footer p + p {
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .steps {
+                flex-direction: column;
+            }
+
+            nav {
+                display: none;
+            }
+
+            header {
+                justify-content: center;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <header>
-        <div id="title">
-            <h1>Moraly Imóveis</h1>
-            <h3>Conectando você ao imóvel ideal</h3>
-        </div>
-
-        <ul>
-            <a href="#"><li>Início</li></a>
-            <a href="#"><li>Serviços</li></a>
-            <a href="#"><li>Sobre</li></a>
-            <a href="#"><li>Contato</li></a>
-            <a href="#" id="inscreva-se-btn"><li>Já tem uma conta?</li></a>
-        </ul>
+        <h1>Moraly</h1>
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#como-funciona">Como Funciona</a>
+            <a href="#contato">Contato</a>
+        </nav>
     </header>
 
-    <main>
-        <aside>
-            <h2><span>Inscreva-se agora!!</span></h2>
-            <h2>para receber</h2><p><h2> anuncios exclusivos</h2>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-            </p>
-            <form>
-                <input type="text" placeholder="Nome">
-                <input type="email" placeholder="E-mail">
-                <input type="submit" value="Enviar >">
-            </form>
-        </aside>
+    <section class="hero">
+        <h1>Seu novo lar começa aqui</h1>
+        <p>Conectando você aos melhores corretores do litoral paulista.</p>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="btn-primary">Fale com a gente no Instagram</a>
+    </section>
 
+    <section id="sobre" class="container">
+        <h2>Sobre a Moraly</h2>
+        <p>Somos uma plataforma que aproxima você de corretores de imóveis especializados na região do litoral paulista. Aqui, você encontra opções de imóveis e entra em contato direto com o corretor responsável.</p>
+    </section>
 
-        <article>
-            <img src="./components/images/moraly.jpg" alt="praia">
-        </article>
-    </main>
-    
+    <section id="como-funciona" class="container">
+        <h2>Como Funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <strong>1.</strong>
+                Navegue pelos imóveis disponíveis.
+            </div>
+            <div class="step">
+                <strong>2.</strong>
+                Escolha o imóvel que te interessar.
+            </div>
+            <div class="step">
+                <strong>3.</strong>
+                Fale direto com o corretor pelo nosso Instagram.
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2>Por que escolher a Moraly?</h2>
+        <ul>
+            <li>Processo simples e rápido.</li>
+            <li>Corretores especializados na região.</li>
+            <li>Foco total em imóveis no litoral paulista.</li>
+        </ul>
+    </section>
+
+    <section id="contato" class="container">
+        <h2>Contato</h2>
+        <p>Acesse nosso Instagram e fale diretamente com a nossa equipe:</p>
+        <a href="https://www.instagram.com/moralyhome" target="_blank" class="main-button">Ver nosso Instagram</a>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Moraly. Todos os direitos reservados.</p>
+        <p>A Moraly apenas conecta clientes e corretores. Não somos responsáveis pelas transações.</p>
+    </footer>
 </body>
 </html>
