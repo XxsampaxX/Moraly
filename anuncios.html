@@ -11,51 +11,92 @@
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f9f4;
       color: #2c3e50;
       padding: 40px 20px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
     }
     h1 {
       text-align: center;
       margin-bottom: 20px;
       color: #2e7d32;
+      width: 100%;
+      font-size: 2rem;
     }
-    .filter {
-      max-width: 800px;
-      margin: 0 auto 30px;
-      text-align: center;
+    aside {
+      width: 100%;
+      max-width: 280px;
     }
-    .filter button {
-      background-color: #2e7d32;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 20px;
+    .filters {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .filters h2 {
+      font-size: 1.4rem;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    .filters label {
+      display: flex;
+      align-items: center;
+      background: #e8f5e9;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .filters label:hover {
+      background-color: #d0eedd;
+    }
+    .filters input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: #fff;
+      border: 2px solid #2e7d32;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      margin-right: 10px;
+      position: relative;
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .filter button:hover,
-    .filter button.active {
-      background-color: #1b5e20;
+    .filters input[type="checkbox"]:checked {
+      background-color: #2e7d32;
+    }
+    .filters input[type="checkbox"]:checked::after {
+      content: "✔";
+      position: absolute;
+      top: 0;
+      left: 3px;
+      color: white;
+      font-size: 12px;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
-      max-width: 1200px;
-      margin: auto;
+      flex: 1;
+      min-width: 300px;
     }
     .card {
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
       overflow: hidden;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
     .card img {
       width: 100%;
@@ -68,6 +109,7 @@
     .card-body h3 {
       color: #2e7d32;
       margin-bottom: 10px;
+      font-size: 1.2rem;
     }
     .card-body p {
       font-size: 0.95rem;
@@ -89,167 +131,219 @@
       color: #2e7d32;
       font-weight: bold;
       text-decoration: none;
+      transition: color 0.3s;
     }
     .contact a:hover {
+      color: #1b5e20;
       text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        padding: 20px 10px;
+      }
+      aside {
+        width: 100%;
+      }
+      .filters {
+        margin-bottom: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Imóveis Disponíveis</h1>
-  <div class="filter">
-    <button class="filter-btn active" data-type="all">Todos</button>
-    <button class="filter-btn" data-type="venda">Venda</button>
-    <button class="filter-btn" data-type="aluguel">Aluguel</button>
-    <button class="filter-btn" data-city="santos">Santos</button>
-    <button class="filter-btn" data-city="guaruja">Guarujá</button>
-    <button class="filter-btn" data-city="sao-vicente">São Vicente</button>
-    <button class="filter-btn" data-city="praia-grande">Praia Grande</button>
-  </div>
-  <div class="grid">
-    <!-- Imóveis existentes -->
-    <div class="card" data-type="venda" data-city="guaruja">
-      <img src="casa_guaru.jpg" alt="Casa no Guarujá" />
-      <div class="card-body">
-        <span class="tag">Venda</span>
-        <h3>Casa - Enseada, Guarujá/SP</h3>
-        <p><strong>Área:</strong> 120m² | 3 quartos</p>
-        <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 2</p>
-        <p><strong>Valor:</strong> R$ 590.000</p>
-        <p><strong>IPTU:</strong> R$ 110 | <strong>Mobiliado:</strong> Sim</p>
-        <p><strong>Destaques:</strong> Churrasqueira, garagem coberta, pet friendly</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome" target="_blank">Falar com corretor no Instagram</a></p>
-        </div>
-      </div>
+  <aside>
+    <div class="filters">
+      <h2>Filtros</h2>
+      <label><input type="checkbox" class="filter-check" data-type="venda"> Venda</label>
+      <label><input type="checkbox" class="filter-check" data-type="aluguel"> Aluguel</label>
+      <hr style="margin: 10px 0;">
+      <label><input type="checkbox" class="filter-check" data-city="santos"> Santos</label>
+      <label><input type="checkbox" class="filter-check" data-city="guaruja"> Guarujá</label>
+      <label><input type="checkbox" class="filter-check" data-city="sao-vicente"> São Vicente</label>
+      <label><input type="checkbox" class="filter-check" data-city="praia-grande"> Praia Grande</label>
+      <hr style="margin: 10px 0;">
+      <label><input type="checkbox" class="filter-check" data-property="apartamento"> Apartamento</label>
+      <label><input type="checkbox" class="filter-check" data-property="casa"> Casa</label>
+      <hr style="margin: 10px 0;">
+      <label><input type="checkbox" class="filter-check" data-price="<2000"> Até R$ 2.000</label>
+      <label><input type="checkbox" class="filter-check" data-price="2000-4000"> R$ 2.000 - R$ 4.000</label>
+      <label><input type="checkbox" class="filter-check" data-price=">4000"> Acima de R$ 4.000</label>
+      <hr style="margin: 10px 0;">
+      <label><input type="checkbox" class="filter-check" data-bedrooms="1"> 1 Dormitório</label>
+      <label><input type="checkbox" class="filter-check" data-bedrooms="2"> 2 Dormitórios</label>
+      <label><input type="checkbox" class="filter-check" data-bedrooms="3"> 3 Dormitórios</label>
+      <label><input type="checkbox" class="filter-check" data-bedrooms=">3"> 4+ Dormitórios</label>
     </div>
-    <div class="card" data-type="aluguel" data-city="santos">
-      <img src="ap_gonza.jpg" alt="Apartamento em Santos" />
-      <div class="card-body">
-        <span class="tag">Aluguel</span>
-        <h3>Apartamento - Gonzaga, Santos/SP</h3>
-        <p><strong>Área:</strong> 85m² | 2 quartos (1 suíte)</p>
-        <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
-        <p><strong>Aluguel:</strong> R$ 2.500/mês</p>
-        <p><strong>Condomínio:</strong> R$ 680 | <strong>IPTU:</strong> R$ 180</p>
-        <p><strong>Destaques:</strong> Varanda, reformado, a 2 quadras da praia</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome" target="_blank">Falar com corretor no Instagram</a></p>
-        </div>
-      </div>
-    </div>
+  </aside>
 
-    <!-- Novos exemplos com imagens atualizadas -->
-    <div class="card" data-type="venda" data-city="santos">
-      <img src="ap_boq.jpg" alt="Apartamento no Boqueirão" />
-      <div class="card-body">
-        <span class="tag">Venda</span>
-        <h3>Apto - Boqueirão, Santos/SP</h3>
-        <p><strong>Área:</strong> 95m² | 3 quartos</p>
-        <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
-        <p><strong>Valor:</strong> R$ 650.000</p>
-        <p><strong>Destaques:</strong> Elevador, portaria 24h</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+  <main style="flex: 1;">
+    <h1>Imóveis Disponíveis</h1>
+    <div class="grid">
+      <div class="card" data-type="venda" data-city="guaruja" data-property="casa" data-price="590000" data-bedrooms="3">
+        <img src="casa_guaru.jpg" alt="Casa no Guarujá" />
+        <div class="card-body">
+          <span class="tag">Venda</span>
+          <h3>Casa - Enseada, Guarujá/SP</h3>
+          <p><strong>Área:</strong> 120m² | 3 dormitórios</p>
+          <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 2</p>
+          <p><strong>Valor:</strong> R$ 590.000</p>
+          <p><strong>IPTU:</strong> R$ 110 | <strong>Mobiliado:</strong> Sim</p>
+          <p><strong>Destaques:</strong> Churrasqueira, garagem coberta, pet friendly</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome" target="_blank">Falar com corretor no Instagram</a></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" data-type="aluguel" data-city="guaruja">
-      <img src="ap_pit.jpg" alt="Kitnet Pitangueiras" />
-      <div class="card-body">
-        <span class="tag">Aluguel</span>
-        <h3>Kitnet - Pitangueiras, Guarujá/SP</h3>
-        <p><strong>Área:</strong> 35m² | 1 cômodo</p>
-        <p><strong>Banheiro:</strong> 1</p>
-        <p><strong>Aluguel:</strong> R$ 1.200</p>
-        <p><strong>Destaques:</strong> Próximo à praia</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+
+      <div class="card" data-type="aluguel" data-city="santos" data-property="apartamento" data-price="2500" data-bedrooms="2">
+        <img src="ap_gonza.jpg" alt="Apartamento em Santos" />
+        <div class="card-body">
+          <span class="tag">Aluguel</span>
+          <h3>Apto - Gonzaga, Santos/SP</h3>
+          <p><strong>Área:</strong> 85m² | 2 dormitórios (1 suíte)</p>
+          <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
+          <p><strong>Aluguel:</strong> R$ 2.500/mês</p>
+          <p><strong>Condomínio:</strong> R$ 680 | <strong>IPTU:</strong> R$ 180</p>
+          <p><strong>Destaques:</strong> Varanda, reformado, a 2 quadras da praia</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome" target="_blank">Falar com corretor no Instagram</a></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" data-type="venda" data-city="sao-vicente">
-      <img src="ap_csv.jpg" alt="Apartamento Centro SV" />
-      <div class="card-body">
-        <span class="tag">Venda</span>
-        <h3>Apto - Centro, São Vicente/SP</h3>
-        <p><strong>Área:</strong> 78m² | 2 quartos</p>
-        <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
-        <p><strong>Valor:</strong> R$ 350.000</p>
-        <p><strong>Destaques:</strong> Vista para o mar</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+
+      <div class="card" data-type="venda" data-city="santos" data-property="apartamento" data-price="650000" data-bedrooms="3">
+        <img src="ap_boq.jpg" alt="Apartamento no Boqueirão" />
+        <div class="card-body">
+          <span class="tag">Venda</span>
+          <h3>Apto - Boqueirão, Santos/SP</h3>
+          <p><strong>Área:</strong> 95m² | 3 dormitórios</p>
+          <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
+          <p><strong>Valor:</strong> R$ 650.000</p>
+          <p><strong>Destaques:</strong> Elevador, portaria 24h</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" data-type="aluguel" data-city="sao-vicente">
-      <img src="casa_ita.jpg" alt="Casa Itararé" />
-      <div class="card-body">
-        <span class="tag">Aluguel</span>
-        <h3>Casa - Itararé, São Vicente/SP</h3>
-        <p><strong>Área:</strong> 110m² | 3 quartos</p>
-        <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 2</p>
-        <p><strong>Aluguel:</strong> R$ 2.100</p>
-        <p><strong>Destaques:</strong> Quintal amplo, garagem</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+
+      <div class="card" data-type="aluguel" data-city="guaruja" data-property="apartamento" data-price="1200" data-bedrooms="1">
+        <img src="ap_pit.jpg" alt="Kitnet Pitangueiras" />
+        <div class="card-body">
+          <span class="tag">Aluguel</span>
+          <h3>Kitnet - Pitangueiras, Guarujá/SP</h3>
+          <p><strong>Área:</strong> 35m² | 1 dormitório</p>
+          <p><strong>Banheiro:</strong> 1</p>
+          <p><strong>Aluguel:</strong> R$ 1.200</p>
+          <p><strong>Destaques:</strong> Próximo à praia</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" data-type="venda" data-city="praia-grande">
-      <img src="cob_cf.jpg" alt="Cobertura Canto do Forte" />
-      <div class="card-body">
-        <span class="tag">Venda</span>
-        <h3>Cobertura - Canto do Forte, Praia Grande/SP</h3>
-        <p><strong>Área:</strong> 200m² | 4 quartos</p>
-        <p><strong>Banheiros:</strong> 3 | <strong>Vagas:</strong> 2</p>
-        <p><strong>Valor:</strong> R$ 980.000</p>
-        <p><strong>Destaques:</strong> Piscina, churrasqueira</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+
+      <div class="card" data-type="venda" data-city="sao-vicente" data-property="apartamento" data-price="350000" data-bedrooms="2">
+        <img src="ap_csv.jpg" alt="Apartamento Centro SV" />
+        <div class="card-body">
+          <span class="tag">Venda</span>
+          <h3>Apto - Centro, São Vicente/SP</h3>
+          <p><strong>Área:</strong> 78m² | 2 dormitórios</p>
+          <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 1</p>
+          <p><strong>Valor:</strong> R$ 350.000</p>
+          <p><strong>Destaques:</strong> Vista para o mar</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" data-type="aluguel" data-city="praia-grande">
-      <img src="ap_avi.jpg" alt="Apartamento Aviação" />
-      <div class="card-body">
-        <span class="tag">Aluguel</span>
-        <h3>Apto - Aviação, Praia Grande/SP</h3>
-        <p><strong>Área:</strong> 65m² | 2 quartos</p>
-        <p><strong>Banheiros:</strong> 1 | <strong>Vagas:</strong> 1</p>
-        <p><strong>Aluguel:</strong> R$ 1.800</p>
-        <p><strong>Destaques:</strong> Sacada com vista, mobiliado</p>
-        <div class="contact">
-          <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+
+      <div class="card" data-type="aluguel" data-city="sao-vicente" data-property="casa" data-price="2100" data-bedrooms="3">
+        <img src="casa_ita.jpg" alt="Casa Itararé" />
+        <div class="card-body">
+          <span class="tag">Aluguel</span>
+          <h3>Casa - Itararé, São Vicente/SP</h3>
+          <p><strong>Área:</strong> 110m² | 3 dormitórios</p>
+          <p><strong>Banheiros:</strong> 2 | <strong>Vagas:</strong> 2</p>
+          <p><strong>Aluguel:</strong> R$ 2.100</p>
+          <p><strong>Destaques:</strong> Quintal amplo, garagem</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
         </div>
       </div>
+
+      <div class="card" data-type="venda" data-city="praia-grande" data-property="apartamento" data-price="980000" data-bedrooms="4">
+        <img src="cob_cf.jpg" alt="Cobertura Canto do Forte" />
+        <div class="card-body">
+          <span class="tag">Venda</span>
+          <h3>Cobertura - Canto do Forte, Praia Grande/SP</h3>
+          <p><strong>Área:</strong> 200m² | 4 dormitórios</p>
+          <p><strong>Banheiros:</strong> 3 | <strong>Vagas:</strong> 2</p>
+          <p><strong>Valor:</strong> R$ 980.000</p>
+          <p><strong>Destaques:</strong> Piscina, churrasqueira</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-type="aluguel" data-city="praia-grande" data-property="apartamento" data-price="1800" data-bedrooms="2">
+        <img src="ap_avi.jpg" alt="Apartamento Aviação" />
+        <div class="card-body">
+          <span class="tag">Aluguel</span>
+          <h3>Apto - Aviação, Praia Grande/SP</h3>
+          <p><strong>Área:</strong> 65m² | 2 dormitórios</p>
+          <p><strong>Banheiros:</strong> 1 | <strong>Vagas:</strong> 1</p>
+          <p><strong>Aluguel:</strong> R$ 1.800</p>
+          <p><strong>Destaques:</strong> Sacada com vista, mobiliado</p>
+          <div class="contact">
+            <p><a href="https://www.instagram.com/moralyhome">Falar com corretor</a></p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </main>
 
   <script>
-    const buttons = document.querySelectorAll(".filter-btn");
+    const checkboxes = document.querySelectorAll(".filter-check");
     const cards = document.querySelectorAll(".card");
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        buttons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        const type = btn.getAttribute("data-type");
-        const city = btn.getAttribute("data-city");
-
-        cards.forEach(card => {
-          const matchesType = !type || type === "all" || card.getAttribute("data-type") === type;
-          const matchesCity = !city || card.getAttribute("data-city") === city;
-
-          if (matchesType && matchesCity) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
+    checkboxes.forEach(check => {
+      check.addEventListener("change", filterCards);
     });
+
+    function filterCards() {
+      const activeTypes = Array.from(checkboxes).filter(cb => cb.checked && cb.dataset.type).map(cb => cb.dataset.type);
+      const activeCities = Array.from(checkboxes).filter(cb => cb.checked && cb.dataset.city).map(cb => cb.dataset.city);
+      const activeProperties = Array.from(checkboxes).filter(cb => cb.checked && cb.dataset.property).map(cb => cb.dataset.property);
+      const activePrices = Array.from(checkboxes).filter(cb => cb.checked && cb.dataset.price).map(cb => cb.dataset.price);
+      const activeBedrooms = Array.from(checkboxes).filter(cb => cb.checked && cb.dataset.bedrooms).map(cb => cb.dataset.bedrooms);
+
+      cards.forEach(card => {
+        const type = card.getAttribute("data-type");
+        const city = card.getAttribute("data-city");
+        const property = card.getAttribute("data-property");
+        const price = parseFloat(card.getAttribute("data-price"));
+        const bedrooms = parseInt(card.getAttribute("data-bedrooms"));
+
+        const matchesType = activeTypes.length === 0 || activeTypes.includes(type);
+        const matchesCity = activeCities.length === 0 || activeCities.includes(city);
+        const matchesProperty = activeProperties.length === 0 || activeProperties.includes(property);
+        const matchesPrice = activePrices.length === 0 || activePrices.some(p => {
+          if (p.startsWith("<")) return price < parseInt(p.slice(1));
+          if (p.startsWith(">")) return price > parseInt(p.slice(1));
+          const [min, max] = p.split("-").map(Number);
+          return price >= min && price <= max;
+        });
+        const matchesBedrooms = activeBedrooms.length === 0 || activeBedrooms.some(b => {
+          if (b.startsWith(">")) return bedrooms > parseInt(b.slice(1));
+          return bedrooms === parseInt(b);
+        });
+
+        card.style.display = (matchesType && matchesCity && matchesProperty && matchesPrice && matchesBedrooms) ? "block" : "none";
+      });
+    }
   </script>
 </body>
 </html>
