@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos e Destaques - Moraly</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f9f4;
+      color: #2c3e50;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      color: #2e7d32;
+    }
+
+    .plans-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .plan {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      width: 320px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .plan:hover {
+      transform: translateY(-5px);
+    }
+
+    .plan h2 {
+      color: #1b5e20;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #388e3c;
+      margin-bottom: 15px;
+    }
+
+    .features {
+      margin-bottom: 20px;
+    }
+
+    .features li {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: #2e7d32;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #1b5e20;
+    }
+
+    .highlight {
+      border: 2px solid #ffca28;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .plans-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Planos e Destaques de Anúncio</h1>
+
+  <div class="plans-container">
+    <div class="plan">
+      <h2>Plano Básico</h2>
+      <p class="price">R$ 29/mês</p>
+      <ul class="features">
+        <li>1 anúncio ativo</li>
+        <li>Validade: 30 dias</li>
+        <li>Exibição normal na página</li>
+        <li>Contato direto com o cliente</li>
+      </ul>
+      <a href="https://wa.me/5513996524953?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20o%20Plano%20B%C3%A1sico%20de%20an%C3%BAncio%20na%20Moraly." target="_blank" class="btn">Contratar</a>
+    </div>
+
+    <div class="plan highlight">
+      <h2>Plano Destaque</h2>
+      <p class="price">R$ 59/mês</p>
+      <ul class="features">
+        <li>3 anúncios ativos</li>
+        <li>Anúncio em destaque na página</li>
+        <li>Validade: 45 dias</li>
+        <li>Botão personalizado de contato</li>
+      </ul>
+      <a href="https://wa.me/5513996524953?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Plano%20Destaque%20de%20an%C3%BAncio%20da%20Moraly.%20Pode%20me%20passar%20mais%20detalhes%3F" target="_blank" class="btn">Contratar</a>
+    </div>
+
+    <div class="plan">
+      <h2>Plano Profissional</h2>
+      <p class="price">R$ 99/mês</p>
+      <ul class="features">
+        <li>Anúncios ilimitados</li>
+        <li>Destaque e prioridade de exibição</li>
+        <li>Suporte exclusivo</li>
+        <li>Relatórios de visitas mensais</li>
+      </ul>
+      <a href="https://wa.me/5513996524953?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20o%20Plano%20Profissional%20com%20an%C3%BAncios%20ilimitados%20na%20Moraly." target="_blank" class="btn">Contratar</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Moraly. Todos os direitos reservados.</p>
+    <p>A Moraly apenas conecta clientes e corretores. Não somos responsáveis pelas transações.</p>
+  </footer>
+</body>
+</html>
